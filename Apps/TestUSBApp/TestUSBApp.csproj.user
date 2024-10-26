@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="DataDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DataPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="HomeMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="HomePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

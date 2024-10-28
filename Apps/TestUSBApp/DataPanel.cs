@@ -17,8 +17,17 @@ namespace TestUSBApp
         public DataPanel()
         {
             InitializeComponent();
-            //InitializeUSB();
         }
+
+        /*void Temp()
+        {
+            String[] ports = SerialPort.GetPortNames();
+            usbDevices.Clear();
+            MessageBox.Show(ports.Length.ToString());
+            foreach (string port in ports)
+                usbDevices.AppendText(port + "\r\n");
+            if(ports.Length > 0) MessageBox.Show(ports.First());
+        }*/
 
         //https://www.youtube.com/watch?v=3SQayMiapKQ
 
@@ -33,7 +42,7 @@ namespace TestUSBApp
                 usbDevices.AppendText(port + "\r\n");
             }
 
-            //MessageBox.Show(portnames.First());
+            //MessageBox.Show(portnames.Count.ToString());
         }
 
         private List<string> GetPorts()
@@ -48,6 +57,7 @@ namespace TestUSBApp
                 return portList;
             }
         }
+        
 
         private void backButton_Click(object sender, EventArgs e)
         {
@@ -63,6 +73,7 @@ namespace TestUSBApp
         private void DataPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible) InitializeUSB();
+            //if (this.Visible) Temp();
         }
     }
 }

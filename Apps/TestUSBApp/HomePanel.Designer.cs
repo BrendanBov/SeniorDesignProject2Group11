@@ -35,9 +35,9 @@
             // 
             // startButton
             // 
-            startButton.Location = new Point(63, 273);
+            startButton.Location = new Point(115, 287);
             startButton.Name = "startButton";
-            startButton.Size = new Size(152, 36);
+            startButton.Size = new Size(215, 61);
             startButton.TabIndex = 2;
             startButton.Text = "Show Measurements";
             startButton.UseVisualStyleBackColor = true;
@@ -45,9 +45,9 @@
             // 
             // quitButton
             // 
-            quitButton.Location = new Point(375, 273);
+            quitButton.Location = new Point(501, 286);
             quitButton.Name = "quitButton";
-            quitButton.Size = new Size(125, 37);
+            quitButton.Size = new Size(201, 62);
             quitButton.TabIndex = 3;
             quitButton.Text = "Quit Program";
             quitButton.UseVisualStyleBackColor = true;
@@ -57,11 +57,11 @@
             // 
             titleLabel.AutoSize = true;
             titleLabel.Font = new Font("Segoe UI", 25F);
-            titleLabel.Location = new Point(189, 45);
+            titleLabel.Location = new Point(207, 71);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(219, 46);
+            titleLabel.Size = new Size(443, 46);
             titleLabel.TabIndex = 4;
-            titleLabel.Text = "Test USB App";
+            titleLabel.Text = "Localization Device Program";
             // 
             // HomePanel
             // 
@@ -71,7 +71,7 @@
             Controls.Add(quitButton);
             Controls.Add(startButton);
             Name = "HomePanel";
-            Size = new Size(607, 446);
+            Size = new Size(849, 543);
             Load += HomePanel_Load;
             ResumeLayout(false);
             PerformLayout();

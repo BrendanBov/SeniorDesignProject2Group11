@@ -38,26 +38,27 @@
             dataPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             dataPanel.Location = new Point(-1, -1);
             dataPanel.Name = "dataPanel";
-            dataPanel.Size = new Size(802, 454);
+            dataPanel.Size = new Size(853, 531);
             dataPanel.TabIndex = 0;
             dataPanel.Visible = false;
             // 
             // homePanel1
             // 
-            homePanel1.Location = new Point(100, -1);
+            homePanel1.Location = new Point(-1, -1);
             homePanel1.Name = "homePanel1";
-            homePanel1.Size = new Size(607, 454);
+            homePanel1.Size = new Size(853, 531);
             homePanel1.TabIndex = 1;
             // 
             // HomeMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            AutoSize = true;
+            ClientSize = new Size(851, 527);
             Controls.Add(homePanel1);
             Controls.Add(dataPanel);
             Name = "HomeMenu";
-            Text = "HomeMenu";
+            Text = "Localization Device Application";
             ResumeLayout(false);
         }
 

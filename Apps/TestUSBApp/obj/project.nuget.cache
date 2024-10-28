@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "G97ZEmfYdZU=",
+  "dgSpecHash": "eplSwoUbIyHzMnwEzN1pz0bXFtIL9YJsS3pGVEHHolHh13PAg1act9KQq7LDs0z9JvSXcEpo9OEgccsXP/0a4g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\TestUSBApp.csproj",
+  "projectFilePath": "D:\\GitHubD\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\TestUSBApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\brend\\.nuget\\packages\\csvhelper\\33.0.1\\csvhelper.33.0.1.nupkg.sha512",
     "C:\\Users\\brend\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\brend\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\brend\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",

@@ -1,5 +1,7 @@
 // Save accelerometer data and print to serial
 
+#include <SoftwareSerial.h>
+
 // SD Libraries
 #include <SD.h>
 #include <SPI.h>
@@ -20,13 +22,16 @@ int pinCS = 10; // Chip Select for UNO
 
 uint16_t GLOBAL_SAMPLERATE_DELAY_MS = 100;
 
+SoftwareSerial hc06(2,3);
+
 // Check I2C device address and correct line below (by default address is 0x29 or 0x28)
 //                                   id, address
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
 
 void setup() 
 {
-  Serial.begin(9600);
+  Serial.begin(9600); // Usb out
+  hc06.begin(9600);   // bluetooth module
   SetupLogFile();
   SetupIMU();
 }
@@ -38,6 +43,7 @@ void loop()
   
   SDWrite(serialOut);
   Serial.print(serialOut);
+  hc06.print(serialOut);
 }
 
 void SetupLogFile()

@@ -14,14 +14,16 @@ namespace TestUSBApp
 {
     public partial class DataPanel : UserControl
     {
-        private SerialPort activePort = new("COM3", 9600);
+        private SerialPort activePort;
+        private SerialPort usbPort = new("COM3", 9600);
+        private SerialPort bluetoothPort = new("COM4", 9600);
 
         private RichTextBox[] dataFields;
 
         string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string logHeader = "X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)";
 
-public DataPanel()
+        public DataPanel()
         {
             InitializeComponent();
         }
@@ -49,6 +51,8 @@ public DataPanel()
                 usbDevices.AppendText(port + "\r\n");
             }*/
 
+
+            activePort = usbPort;
             try
             {
                 activePort.Open();
@@ -56,9 +60,23 @@ public DataPanel()
             }
             catch
             {
+                // TODO: consider opening a thread for bluetooth search
+                // causes other elements to not load until process is done
+                activePort = bluetoothPort;
+                try
+                {
+                    activePort.Open();
+                    errorLabel.Visible = false;
+                    bluetoothPicture.Visible = true;
+                }
+                catch
+                {
+                    errorLabel.Visible = true;
+                }
                 //MessageBox.Show("no device found");
-                errorLabel.Visible = true;
             }
+
+
 
 
             //MessageBox.Show(portnames.Count.ToString());
@@ -93,7 +111,7 @@ public DataPanel()
         {
             deviceTimer.Enabled = this.Visible;
             if (this.Visible) InitializeUSB();
-            else activePort.Close();
+            else if (activePort != null) activePort.Close();
             //if (this.Visible) Temp();
         }
 
@@ -120,6 +138,8 @@ public DataPanel()
                 data = activePort.ReadLine();
                 if (!string.IsNullOrEmpty(data)) break;
             }
+
+            //usbDevices.AppendText(data);
 
             string[] fields = data.Split(',');
             if (fields.Length < 9) return;

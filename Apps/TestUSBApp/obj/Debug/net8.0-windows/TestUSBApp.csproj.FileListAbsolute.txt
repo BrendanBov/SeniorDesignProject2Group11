@@ -61,7 +61,6 @@ D:\GitHubD\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\
 D:\GitHubD\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.genruntimeconfig.cache
 D:\GitHubD\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\ref\TestUSBApp.dll
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.csproj.AssemblyReference.cache
-C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.DataDisplay.resources
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.DataPanel.resources
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.HomeMenu.resources
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.HomePanel.resources
@@ -93,3 +92,5 @@ C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUS
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.genruntimeconfig.cache
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\ref\TestUSBApp.dll
 D:\GitHubD\SeniorDesignProject2Group11\Apps\TestUSBApp\bin\Debug\net8.0-windows\CsvHelper.dll
+C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\bin\Debug\net8.0-windows\CsvHelper.dll
+C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.Resource1.resources

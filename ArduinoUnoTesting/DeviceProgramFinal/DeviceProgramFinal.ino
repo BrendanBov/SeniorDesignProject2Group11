@@ -1,6 +1,7 @@
 // Save accelerometer data and print to serial
 
 #include <SoftwareSerial.h>
+#include <Adafruit_GPS.h>
 
 // SD Libraries
 #include <SD.h>
@@ -18,13 +19,17 @@
 // TODO make handling for plugging in sd card during runtime
 File logFile;
 
-int pinCS = 10; // Chip Select for UNO
+const int pinCS = 10; // Chip Select for UNO, Used for SD card port
 
-uint16_t GLOBAL_SAMPLERATE_DELAY_MS = 100;
-int BAUDRATE = 9600;
+const uint16_t GLOBAL_SAMPLERATE_DELAY_MS = 100;
+const int BAUDRATE = 9600;
 
 // Bluetooth
 SoftwareSerial hc06(2,3);
+
+// GPS param
+SoftwareSerial mySerial(9, 8);
+Adafruit_GPS GPS(&mySerial);
 
 // Check I2C device address and correct line below (by default address is 0x29 or 0x28)
 //                                   id, address
@@ -34,14 +39,18 @@ void setup()
 {
   Serial.begin(BAUDRATE); // Usb out
   hc06.begin(BAUDRATE);   // bluetooth module
+  delay(2000);
+
   SetupLogFile();
   SetupIMU();
+  SetupGPS();
 }
 
 void loop() 
 {
   String serialOut = "";
   PollIMU(serialOut);
+  PollGPS(serialOut);
   
   SDWrite(serialOut);
   Serial.print(serialOut);
@@ -59,10 +68,11 @@ void SetupLogFile()
     return;
   }
 
+  // TODO Figure out units for elevation
   if (!SD.exists("log.csv"))  //write first line to log file
   {
     logFile = SD.open("log.csv", FILE_WRITE);
-    logFile.println("X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)");
+    logFile.println("Date,Time,Satellites,Latiude,Longitude,Elevation (?),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)");
     logFile.close(); 
   }
   
@@ -79,8 +89,25 @@ void SetupIMU()
     Serial.print("IMU ERROR");
     while (1);
   }
+}
+
+void SetupGPS()
+{/*
+  // 9600 NMEA is the default baud rate for Adafruit MTK GPS's- some use 4800
+  GPS.begin(9600);
+
+  // uncomment this line to turn on RMC (recommended minimum) and GGA (fix data) including altitude
+  GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+
+  // Set the update rate
+  GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);   // 1 Hz update rate
+
+  // Request updates on antenna status, comment out to keep quiet
+  GPS.sendCommand(PGCMD_ANTENNA);
 
   delay(1000);
+  // Ask for firmware version
+  mySerial.println(PMTK_Q_RELEASE);*/
 }
 
 void PollIMU(String &serialOut)
@@ -119,6 +146,11 @@ void printEvent(sensors_event_t* event, String &serialOut, bool last) {
   serialOut += String(x, 3) + ',' + String(y, 3) + ',' + String(z, 3);
   char lastChar = last ? '\n' : ',';
   serialOut += lastChar;
+}
+
+void PollGPS(String &serialOut)
+{
+  
 }
 
 void SDWrite(String &data)

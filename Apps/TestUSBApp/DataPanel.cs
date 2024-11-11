@@ -21,7 +21,7 @@ namespace TestUSBApp
         private RichTextBox[] dataFields;
 
         string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string logHeader = "X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)";
+        const string logHeader = "Date,Time,Satellites,Latiude,Longitude,Elevation (units?),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)";
 
         public DataPanel()
         {
@@ -104,7 +104,7 @@ namespace TestUSBApp
 
         private void DataPanel_Load(object sender, EventArgs e)
         {
-            dataFields = [accelXData, accelYData, accelZData, gyroXData, gyroYData, gyroZData, magXData, magYData, magZData];
+            dataFields = [dateData, timeData, satellitesData, latitudeData, longitudeData, elevationData, accelXData, accelYData, accelZData, gyroXData, gyroYData, gyroZData, magXData, magYData, magZData];
         }
 
         private void DataPanel_VisibleChanged(object sender, EventArgs e)
@@ -133,6 +133,8 @@ namespace TestUSBApp
         {
             // check for expected serial data format
             string data;
+            // TODO: consider opening a thread for serial polling
+            // causes elements to not be interactive
             while (true)
             {
                 data = activePort.ReadLine();
@@ -142,15 +144,16 @@ namespace TestUSBApp
             //usbDevices.AppendText(data);
 
             string[] fields = data.Split(',');
-            if (fields.Length < 9) return;
-            if (dataFields.Length < 9) return;
+            if (fields.Length < 15) return;
+            if (dataFields.Length < 15) return;
 
             // display data in fields
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 15; i++)
                 dataFields[i].Text = fields[i];
 
             //TODO verify this output file is the same as the one on the SD card
             // write to log file
+            //if file does not exist, create file and paste header
             string toWrite = File.Exists(Path.Combine(filePath, "log.csv")) ? data : logHeader;
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(filePath, "log.csv"), true))
             {

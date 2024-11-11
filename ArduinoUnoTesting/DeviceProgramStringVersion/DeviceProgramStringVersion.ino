@@ -1,15 +1,26 @@
-// Device Program Final
-// Group 11
-// Writes 9-axis Accelerometer and GPS data to 3 locations:
-// SD, USB, and bluetooth
+// This program saves the serial ouput to a large string
+// to be serial printed by each device.
+// This is horribly inefficient for memory usage.
 
+// Save accelerometer data and print to serial
+//#include <SoftwareSerial.h>
 #include <Adafruit_GPS.h>
 
 // SD Libraries
 #include <SD.h>
+//#include <SPI.h>
 
 // IMU Libraries
+//#include <Wire.h>
+//#include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
+//#include <utility/imumaths.h>
+
+// TODO probably get rid of global log file variable
+// since i have to open and close it each tile
+//
+// TODO make handling for plugging in sd card during runtime
+//File logFile;
 
 const int pinCS = 10; // Chip Select for UNO, Used for SD card port
 
@@ -20,8 +31,8 @@ const int BAUDRATE = 9600;
 SoftwareSerial hc06(2,3);
 
 // GPS param
-SoftwareSerial gpsSerial(9, 8);
-Adafruit_GPS GPS(&gpsSerial);
+SoftwareSerial mySerial(9, 8);
+Adafruit_GPS GPS(&mySerial);
 
 // Check I2C device address and correct line below (by default address is 0x29 or 0x28)
 //                                   id, address
@@ -40,21 +51,13 @@ void setup()
 
 void loop() 
 {
-  PollIMU();
-  PollGPS();
-}
-
-// Writes to each output method
-void MultiWrite(String str)
-{
-  SDWrite(str);
-  Serial.print(str);
-  hc06.print(str);
-}
-
-void MultiWrite(char c)
-{
-  MultiWrite(String(c));
+  String serialOut = "";
+  PollIMU(serialOut);
+  PollGPS(serialOut);
+  
+  SDWrite(serialOut);
+  Serial.print(serialOut);
+  hc06.print(serialOut);
 }
 
 void SetupLogFile()
@@ -80,7 +83,7 @@ void SetupLogFile()
 
 void SetupIMU()
 {
-  while (!Serial) delay(10);  // wait for serial port to open
+  while (!Serial) delay(10);  // wait for serial port to open!
 
   // Initialise the sensor
   if (!bno.begin())
@@ -106,10 +109,10 @@ void SetupGPS()
 
   delay(1000);
   // Ask for firmware version
-  gpsSerial.println(PMTK_Q_RELEASE);
+  mySerial.println(PMTK_Q_RELEASE);
 }
 
-void PollIMU()
+void PollIMU(String &serialOut)
 {
   // could add VECTOR_ACCELEROMETER, VECTOR_MAGNETOMETER,VECTOR_GRAVITY...
   sensors_event_t accelerometerData, angVelocityData, magnetometerData;
@@ -117,14 +120,14 @@ void PollIMU()
   bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
   bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
 
-  printEvent(&accelerometerData, false);
-  printEvent(&angVelocityData, false);
-  printEvent(&magnetometerData, true);
+  printEvent(&accelerometerData, serialOut, false);
+  printEvent(&angVelocityData, serialOut, false);
+  printEvent(&magnetometerData, serialOut, true);
 
   delay(GLOBAL_SAMPLERATE_DELAY_MS);
 }
 
-void printEvent(sensors_event_t* event, bool last) {
+void printEvent(sensors_event_t* event, String &serialOut, bool last) {
   double x = -1000000, y = -1000000 , z = -1000000; // dumb values, easy to spot problem
   if (event->type == SENSOR_TYPE_ACCELEROMETER) {
     x = event->acceleration.x;
@@ -142,13 +145,12 @@ void printEvent(sensors_event_t* event, bool last) {
     z = event->magnetic.z;
   }
 
-  String str = String(x, 3) + ',' + String(y, 3) + ',' + String(z, 3);
+  serialOut += String(x, 3) + ',' + String(y, 3) + ',' + String(z, 3);
   char lastChar = last ? '\n' : ',';
-  str += lastChar;
-  MultiWrite(str);
+  serialOut += lastChar;
 }
 
-void PollGPS()
+void PollGPS(String &serialOut)
 {
   char c = GPS.read();
 
@@ -160,40 +162,37 @@ void PollGPS()
   }
 
   // Date
-  MultiWrite(String(GPS.day) + '/');
-  MultiWrite(String(GPS.month) + F("/20"));
-  MultiWrite(String(GPS.year) + ',');
+  serialOut += String(GPS.day) + '/' + String(GPS.month) + F("/20") + String(GPS.year) + ',';
 
   // Time
-  if (GPS.hour < 10) MultiWrite('0');
-  MultiWrite(String(GPS.hour) + ':');
+  if (GPS.hour < 10) serialOut += '0';
+  serialOut += String(GPS.hour) + ':';
 
-  if (GPS.minute < 10) MultiWrite('0');
-  MultiWrite(String(GPS.minute) + ':');
+  if (GPS.minute < 10) serialOut += '0';
+  serialOut += String(GPS.minute) + ':';
 
-  if (GPS.seconds < 10) MultiWrite('0');
-  MultiWrite(String(GPS.seconds) + '.');
+  if (GPS.seconds < 10) serialOut += '0';
+  serialOut += String(GPS.seconds) + '.';
 
-  if (GPS.milliseconds < 10) MultiWrite(F("00"));
+  if (GPS.milliseconds < 10) serialOut += F("00");
   else if (GPS.milliseconds > 9 && GPS.milliseconds < 100) 
-    MultiWrite('0');
+    serialOut += '0';
 
-  MultiWrite(String(GPS.milliseconds) + ',');
+  serialOut += String(GPS.milliseconds) + ',';
 
   // Satellites
-  MultiWrite(String((int)GPS.satellites) + ',');
+  serialOut += String((int)GPS.satellites) + ',';
   //Serial.print("Fix: "); Serial.print((int)GPS.fix); might still need this
 
   //Lat / Long
-  MultiWrite(String(GPS.latitude, 4) + ','); //Serial.print(GPS.lat); idk what this does
-  MultiWrite(String(GPS.longitude, 4)+ ','); //Serial.print(GPS.lon); idk what this does
+  serialOut += String(GPS.latitude, 4) + ','; //Serial.print(GPS.lat); idk what this does
+  serialOut += String(GPS.longitude, 4)+ ','; //Serial.print(GPS.lon); idk what this does
 
   // Elevation 
-  MultiWrite(String(GPS.altitude));
-  MultiWrite('\n');
+  Serial.print(GPS.altitude);
+  Serial.print('\n');
 }
 
-// TODO make handling for plugging in sd card during runtime
 void SDWrite(String &data)
 {
   File logFile = SD.open(F("log.csv"), FILE_WRITE);

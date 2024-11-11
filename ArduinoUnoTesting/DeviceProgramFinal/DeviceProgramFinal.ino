@@ -6,7 +6,7 @@
 #include <Adafruit_GPS.h>
 
 // SD Libraries
-#include <SD.h>
+//#include <SD.h>
 
 // IMU Libraries
 #include <Adafruit_BNO055.h>
@@ -45,7 +45,7 @@ void loop()
 }
 
 // Writes to each output method
-void MultiWrite(String str)
+void MultiWrite(const char* str)
 {
   SDWrite(str);
   Serial.print(str);
@@ -54,12 +54,13 @@ void MultiWrite(String str)
 
 void MultiWrite(char c)
 {
-  MultiWrite(String(c));
+  char str[2] = {c, '\0'};
+  MultiWrite(str);
 }
 
 void SetupLogFile()
 {
-  pinMode(pinCS, OUTPUT);
+  /*pinMode(pinCS, OUTPUT);
 
   // SD Card Initialization
   if (!SD.begin())
@@ -74,7 +75,7 @@ void SetupLogFile()
     File logFile = SD.open(F("log.csv"), FILE_WRITE);
     logFile.println(F("Date,Time,Satellites,Latiude,Longitude,Elevation (units?),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)"));
     logFile.close(); 
-  }
+  }*/
   
 }
 
@@ -142,65 +143,80 @@ void printEvent(sensors_event_t* event, bool last) {
     z = event->magnetic.z;
   }
 
-  String str = String(x, 3) + ',' + String(y, 3) + ',' + String(z, 3);
+  char str[32];
   char lastChar = last ? '\n' : ',';
-  str += lastChar;
+  snprintf(str, sizeof(str), "%.3f,%.3f,%.3f%c", x, y, z, lastChar);
+  //String str = String(x, 3) + ',' + String(y, 3) + ',' + String(z, 3);
   MultiWrite(str);
 }
 
 void PollGPS()
 {
-  char c = GPS.read();
+  GPS.read();
 
   // if a sentence is received, we can check the checksum, parse it...
-  if (GPS.newNMEAreceived()) 
-  {
-    if (!GPS.parse(GPS.lastNMEA()))   // this also sets the newNMEAreceived() flag to false
-      return;  // we can fail to parse a sentence in which case we should just wait for another
-  }
+  if (GPS.newNMEAreceived() && !GPS.parse(GPS.lastNMEA())) 
+    return;
+
+  char str[64];
 
   // Date
-  MultiWrite(String(GPS.day) + '/');
-  MultiWrite(String(GPS.month) + F("/20"));
-  MultiWrite(String(GPS.year) + ',');
+  //MultiWrite(String(GPS.day) + '/');
+  //MultiWrite(String(GPS.month) + F("/20"));
+  //MultiWrite(String(GPS.year) + ',');
+  snprintf(str, sizeof(str), "%u/%u/20%u,", GPS.day, GPS.month, GPS.year);
+  MultiWrite(str);
 
   // Time
   if (GPS.hour < 10) MultiWrite('0');
-  MultiWrite(String(GPS.hour) + ':');
+  snprintf(str, sizeof(str), "%u%c,", GPS.hour, ':');
+  MultiWrite(str);
+  //MultiWrite(String(GPS.hour) + ':');
+
 
   if (GPS.minute < 10) MultiWrite('0');
-  MultiWrite(String(GPS.minute) + ':');
+  //MultiWrite(String(GPS.minute) + ':');
+  snprintf(str, sizeof(str), "%u%c,", GPS.minute, ':');
+  MultiWrite(str);
 
   if (GPS.seconds < 10) MultiWrite('0');
-  MultiWrite(String(GPS.seconds) + '.');
+  //MultiWrite(String(GPS.seconds) + '.');
+  snprintf(str, sizeof(str), "%u%c,", GPS.seconds, '.');
+  MultiWrite(str);
 
   if (GPS.milliseconds < 10) MultiWrite(F("00"));
   else if (GPS.milliseconds > 9 && GPS.milliseconds < 100) 
     MultiWrite('0');
 
-  MultiWrite(String(GPS.milliseconds) + ',');
+  //MultiWrite(String(GPS.milliseconds) + ',');
+  snprintf(str, sizeof(str), "%u%c,", GPS.milliseconds, ',');
+  MultiWrite(str);
 
   // Satellites
-  MultiWrite(String((int)GPS.satellites) + ',');
+  //MultiWrite(String((int)GPS.satellites) + ',');
+  snprintf(str, sizeof(str), "%u%c,", GPS.satellites, ',');
+  MultiWrite(str);
   //Serial.print("Fix: "); Serial.print((int)GPS.fix); might still need this
 
-  //Lat / Long
-  MultiWrite(String(GPS.latitude, 4) + ','); //Serial.print(GPS.lat); idk what this does
-  MultiWrite(String(GPS.longitude, 4)+ ','); //Serial.print(GPS.lon); idk what this does
+  //Lat / Long and Elevation
+  //MultiWrite(String(GPS.latitude, 4) + ','); //Serial.print(GPS.lat); idk what this does
+  //MultiWrite(String(GPS.longitude, 4)+ ','); //Serial.print(GPS.lon); idk what this does
+  snprintf(str, sizeof(str), "%.3f,%.3f,%.3f,", GPS.latitude, GPS.longitude, GPS.altitude);
+  MultiWrite(str);
 
   // Elevation 
-  MultiWrite(String(GPS.altitude));
-  MultiWrite('\n');
+  //MultiWrite(String(GPS.altitude));
+  //MultiWrite(',');
 }
 
 // TODO make handling for plugging in sd card during runtime
-void SDWrite(String &data)
+void SDWrite(const char* data)
 {
-  File logFile = SD.open(F("log.csv"), FILE_WRITE);
+  /*File logFile = SD.open(F("log.csv"), FILE_WRITE);
 
   if(logFile) 
   {
     logFile.print(data);
     logFile.close();
-  }
+  }*/
 }

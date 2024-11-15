@@ -384,11 +384,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\TestUSBApp.csproj",
+      "projectUniqueName": "D:\\GitHubD\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\TestUSBApp.csproj",
       "projectName": "TestUSBApp",
-      "projectPath": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\TestUSBApp.csproj",
+      "projectPath": "D:\\GitHubD\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\TestUSBApp.csproj",
       "packagesPath": "C:\\Users\\brend\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\obj\\",
+      "outputPath": "D:\\GitHubD\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\brend\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -411,11 +411,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -454,7 +449,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

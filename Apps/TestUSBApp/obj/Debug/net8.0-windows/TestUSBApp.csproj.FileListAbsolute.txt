@@ -94,3 +94,4 @@ C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUS
 D:\GitHubD\SeniorDesignProject2Group11\Apps\TestUSBApp\bin\Debug\net8.0-windows\CsvHelper.dll
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\bin\Debug\net8.0-windows\CsvHelper.dll
 C:\Users\brend\OneDrive\Documents\GitHub\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.Resource1.resources
+D:\GitHubD\SeniorDesignProject2Group11\Apps\TestUSBApp\obj\Debug\net8.0-windows\TestUSBApp.Resource1.resources

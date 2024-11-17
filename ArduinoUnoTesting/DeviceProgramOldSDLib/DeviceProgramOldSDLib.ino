@@ -6,7 +6,7 @@
 #include <Adafruit_GPS.h>
 
 // SD Libraries
-//#include <SD.h>
+#include <SD.h>
 
 // IMU Libraries
 #include <Adafruit_BNO055.h>
@@ -69,7 +69,7 @@ void MultiWrite(__FlashStringHelper* flash)
 }*/
 
 void SetupLogFile()
-{/*
+{
   pinMode(pinCS, OUTPUT);
 
   // SD Card Initialization
@@ -85,7 +85,7 @@ void SetupLogFile()
     File logFile = SD.open(filePath, FILE_WRITE);
     logFile.println(F("Date,Time,Satellites,Latiude,Longitude,Elevation (units?),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)"));
     logFile.close(); 
-  }*/
+  }
 }
 
 void SetupIMU()
@@ -214,19 +214,19 @@ void PollGPS()
  // MultiWrite(str);
 
   // Elevation 
-  //MultiWrite(String(GPS.altitude));
+  MultiWrite(String(GPS.altitude) + ',');
 
-  MultiWrite(F(","));
+  //MultiWrite(F(","));
 }
 
 // TODO make handling for plugging in sd card during runtime
 void SDWrite(String &data)
-{/*
+{
   File logFile = SD.open(filePath, FILE_WRITE);
 
   if(logFile) 
   {
     logFile.print(data);
     logFile.close();
-  }*/
+  }
 }

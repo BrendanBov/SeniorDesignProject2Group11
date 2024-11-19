@@ -5,19 +5,19 @@
 
 #include <Adafruit_GPS.h>
 
-// SD Libraries
-#include <SD.h>
+// Petit FS SD Library
+#include "PetitFS.h"
 
 // IMU Libraries
 #include <Adafruit_BNO055.h>
-
-const int pinCS = 10; // Chip Select for UNO, Used for SD card port
 
 const uint16_t GLOBAL_SAMPLERATE_DELAY_MS = 100;
 const int BAUDRATE = 9600;
 
 // SD
-const auto filePath = "log.csv";
+const int pinCS = 10; // Chip Select for UNO, Used for SD card port
+const char* filePath = "log.csv";
+FATFS fatFS;
 
 // Bluetooth
 SoftwareSerial hc06(2,3);
@@ -66,8 +66,12 @@ void SetupLogFile()
 {
   pinMode(pinCS, OUTPUT);
 
+  if (pf_mount(&fatFS)) return;
+
+  if (pf_open(filePath)) return;
+
   // SD Card Initialization
-  if (!SD.begin())
+  /*if (!SD.begin())
   {
     Serial.println(F("SD NOT FOUND"));
     return;
@@ -78,7 +82,7 @@ void SetupLogFile()
     File logFile = SD.open(filePath, FILE_WRITE);
     logFile.println(F("Date,Time,Satellites,Latiude,Longitude,Elevation (m),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)"));
     logFile.close(); 
-  }
+  }*/
 }
 
 void SetupIMU()
@@ -194,12 +198,12 @@ void PollGPS()
 
 // TODO make handling for plugging in sd card during runtime
 void SDWrite(String &data)
-{
+{/*
   File logFile = SD.open(filePath, FILE_WRITE);
 
   if(logFile) 
   {
     logFile.print(data);
     logFile.close();
-  }
+  }*/
 }

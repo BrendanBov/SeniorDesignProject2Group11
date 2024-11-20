@@ -64,11 +64,11 @@ void MultiWrite(__FlashStringHelper* flash)
 }
 void SetupLogFile()
 {
-  pinMode(pinCS, OUTPUT);
+  //pinMode(pinCS, OUTPUT);
 
-  if (pf_mount(&fatFS)) return;
+  //if (pf_mount(&fatFS)) return;
 
-  if (pf_open(filePath)) return;
+  //if (pf_open(filePath)) return;
 
   // SD Card Initialization
   /*if (!SD.begin())

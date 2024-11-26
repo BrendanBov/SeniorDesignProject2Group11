@@ -21,7 +21,7 @@ namespace TestUSBApp
         private RichTextBox[] dataFields;
 
         string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        const string logHeader = "Date,Time,Satellites,Latiude,Longitude,Elevation (units?),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)";
+        const string logHeader = "Date,Time,Latiude,Longitude,Satellites,Elevation (m),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)";
 
         public DataPanel()
         {
@@ -104,7 +104,7 @@ namespace TestUSBApp
 
         private void DataPanel_Load(object sender, EventArgs e)
         {
-            dataFields = [dateData, timeData, satellitesData, latitudeData, longitudeData, elevationData, accelXData, accelYData, accelZData, gyroXData, gyroYData, gyroZData, magXData, magYData, magZData];
+            dataFields = [dateData, timeData, latitudeData, longitudeData, satellitesData, elevationData, accelXData, accelYData, accelZData, gyroXData, gyroYData, gyroZData, magXData, magYData, magZData];
         }
 
         private void DataPanel_VisibleChanged(object sender, EventArgs e)

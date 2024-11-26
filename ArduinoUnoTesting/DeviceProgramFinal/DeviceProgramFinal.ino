@@ -54,11 +54,20 @@ void MultiWrite(String &str)
   hc06.print(str);
 }
 
-void MultiWrite(__FlashStringHelper* flash)
+void MultiWrite(__FlashStringHelper* str)
 {
-  String str = String(flash);
-  MultiWrite(str);
+  SDWrite(str);
+  Serial.print(str);
+  hc06.print(str);
 }
+
+void MultiWrite(char* str)
+{
+  SDWrite(str);
+  Serial.print(str);
+  hc06.print(str);
+}
+
 void SetupLogFile()
 {
   pinMode(pinCS, OUTPUT);

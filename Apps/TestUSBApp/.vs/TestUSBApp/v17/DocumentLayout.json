@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|c:\\users\\brend\\onedrive\\documents\\github\\seniordesignproject2group11\\apps\\testusbapp\\datapanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|solutionrelative:datapanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|c:\\users\\brend\\onedrive\\documents\\github\\seniordesignproject2group11\\apps\\testusbapp\\datapanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|solutionrelative:datapanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|c:\\users\\brend\\onedrive\\documents\\github\\seniordesignproject2group11\\apps\\testusbapp\\datapanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|solutionrelative:datapanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{921D76F3-BFD1-4795-A0CF-7DEC51D6582B}|TestUSBApp.csproj|c:\\users\\brend\\onedrive\\documents\\github\\seniordesignproject2group11\\apps\\testusbapp\\homemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,7 +57,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 131,
+          "DockedWidth": 190,
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -78,13 +78,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DataPanel.cs",
               "DocumentMoniker": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\DataPanel.cs",
               "RelativeDocumentMoniker": "DataPanel.cs",
               "ToolTip": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\DataPanel.cs",
               "RelativeToolTip": "DataPanel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T02:39:27.421Z",
               "EditorCaption": ""
@@ -135,7 +135,7 @@
               "RelativeDocumentMoniker": "DataPanel.Designer.cs",
               "ToolTip": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\DataPanel.Designer.cs",
               "RelativeToolTip": "DataPanel.Designer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T02:39:27.376Z",
               "EditorCaption": ""
@@ -154,12 +154,12 @@
           ]
         },
         {
-          "DockedWidth": 232,
+          "DockedWidth": 173,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DataPanel.cs [Design]",
               "DocumentMoniker": "C:\\Users\\brend\\OneDrive\\Documents\\GitHub\\SeniorDesignProject2Group11\\Apps\\TestUSBApp\\DataPanel.cs",
               "RelativeDocumentMoniker": "DataPanel.cs",

@@ -67,7 +67,10 @@ void EchoGPS()
   }
 }
 
-void PollGPS() // lightweight serial parsing
+// lightweight serial parsing for GPS
+// utilizes a buffer of 16 bytes
+// + another 16 for formatting and printing special cases
+void PollGPS()
 {
   const uint8_t gpsStrLen = 16;
   const char msgStart = '$';
@@ -82,7 +85,7 @@ void PollGPS() // lightweight serial parsing
   static char gpsStr[gpsStrLen] = {0};
   static uint8_t msgIndex = 0;
 
-  //Time,Latiude,Longitude,Satellites,Elevation (m),Date
+  //Date,Time,Latiude,Longitude,Satellites,Elevation (m),
   while(gpsSerial.available())
   {
     char c = gpsSerial.read();
@@ -107,7 +110,7 @@ void PollGPS() // lightweight serial parsing
         checkNMEA = false;
 
         // print date at start of gps string
-        if(currNMEA == GGA) MultiWrite(String(date) + ',');
+        if(currNMEA == GGA) PrintDate();
       }
 
       //MultiWrite(gpsStr);
@@ -169,6 +172,23 @@ void PollGPS() // lightweight serial parsing
   */
 }
 
+// Unique print function due to msg position and formatting
+void PrintDate()
+{
+  // dd/mm/20yy
+  const char* dateFormat = "%u/%u/20%u,";
+  char str[16] = {0};
+
+  // prevent char overflow on sprintf
+  if (date > 999999) date = 010100;
+  uint8_t day = date / 10000;
+  uint8_t month = (date / 100) % 100;
+  uint8_t year = date % 100;
+  sprintf(str, dateFormat, day, month, year);
+  MultiWrite(str);
+  //MultiWrite(String(date) + ',');
+}
+
 void PrintGPS(char* str, NMEAtype type, uint8_t index, bool end)
 {
   // handle which elements in GPS serial are printed
@@ -176,13 +196,23 @@ void PrintGPS(char* str, NMEAtype type, uint8_t index, bool end)
   //                           index <16   ------>   0>
   const uint16_t printRMC = 0x200; // 0000001000000000
   const uint16_t printGGA = 0x2BE; // 0000001010111110
+  const uint16_t latLonMask = 0x14;// 0000000000010100
+
+  uint16_t indexMask = 1 << index;
 
   if (type == GGA)
   {
-    if ((1 << index) & printGGA)
+    if (indexMask & printGGA)
     {
-      MultiWrite(str);
-      if (!end) MultiWrite(F(",")); //GET RID OF if (!end)
+      // date is at GGA index 1
+      if (index == 1) PrintTime(str);
+      else if (indexMask & latLonMask) PrintLatLon(str, index == 4);
+      else MultiWrite(str);
+
+      // Don't print ',' after lat or lon,
+      // To concat lat/lon and N/E/S/W
+      if (!(indexMask & latLonMask)) 
+        MultiWrite(F(","));
     }
 
     //TEMP
@@ -190,9 +220,51 @@ void PrintGPS(char* str, NMEAtype type, uint8_t index, bool end)
   }
 
   // get date from RMC, everything else prints in GGA
-  else if (type == RMC && ((1 << index) & printGGA))
+  // stored to print at beginning of message
+  else if (type == RMC && (indexMask & printRMC))
     date = strtol(str, sizeof(str), 10);
+}
+
+// Handle formatting for time
+void PrintTime(char* oldStr)
+{
+  char str[16] = {0}; // new string to prevent memory problems
+  strcpy(str, oldStr);
+
+  memmove(str + 5, str + 4, 7);
+  str[4] = ':';
+  //hhmm:ss.sss
+
+  memmove(str + 2, str + 1, 11);
+  str[2] = ':';
+  //hh:mm:ss.sss
+
+  str[12] = '\0'; //HOTFIX to prevent mutable array
+
+  MultiWrite(str);
+}
+
+void PrintLatLon(char* oldStr, bool isLon)
+{
+  char str[16] = {0}; // new string to prevent memory problems
+  strcpy(str, oldStr);
+  //lat: ddmm.mmmm      lon: dddmm.mmmm
   
-    
+  str[9 + isLon] = '\"';
+  //lat: ddmm.mmmm"     lon: dddmm.mmmm"
   
+  memmove(str + 7 + isLon, str + 6 + isLon, 4 + isLon);
+  str[7 + isLon] = '.';
+  //lat: ddmm.mm.mm"    lon: dddmm.mm.mm"
+
+  str[4 + isLon] = '\'';
+  //lat: ddmm'mm.mm"    lon: dddmm'mm.mm"
+  
+  memmove(str + 2 + isLon, str + 1 + isLon, 10 + isLon);
+  str[2 + isLon] = char(176); // degrees character
+  //lat: dd°mm'mm.mm"   lon: dd°mm'mm.mm"
+
+  str[12 + isLon] = '\0'; //HOTFIX to prevent mutable array
+
+  MultiWrite(str);
 }

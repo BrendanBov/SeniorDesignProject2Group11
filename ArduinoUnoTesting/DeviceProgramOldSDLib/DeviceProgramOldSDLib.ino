@@ -3,12 +3,15 @@
 // Writes 9-axis Accelerometer and GPS data to 3 locations:
 // SD, USB, and bluetooth
 
-#include <Adafruit_GPS.h>
+#include <SoftwareSerial.h>
 
-// SD Libraries
+// GPS Library
+#include <Adafruit_GPS.h> 
+
+// SD Library
 #include <SD.h>
 
-// IMU Libraries
+// IMU Library
 #include <Adafruit_BNO055.h>
 
 const int pinCS = 10; // Chip Select for UNO, Used for SD card port

@@ -12,15 +12,13 @@
 // IMU Libraries
 #include <Adafruit_BNO055.h>
 
-const uint16_t GLOBAL_SAMPLERATE_DELAY_MS = 100;
+const uint16_t PRINT_DELAY_MS = 100;
 const int BAUDRATE = 9600;
 
 // GPS param
 PA1010D gps(9, 8);
 
 //IMU Obj
-// Check I2C device address and correct line below (by default address is 0x29 or 0x28)
-//                                   id, address
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
 
 // SD
@@ -30,6 +28,8 @@ const char* filePath = "log.csv";
 // Bluetooth
 SoftwareSerial hc06(2,3);
 
+// Timer
+unsigned long startTime = 0;
 
 void setup() 
 {
@@ -39,19 +39,28 @@ void setup()
   gps.SetupGPS();
   SetupIMU();
   SetupLogFile();
+  SetupTimer();
 }
 
 void loop() 
 {
   gps.PollGPS();
-  if(!gps.readingGPS && gps.gpsComplete)
+
+  bool printFlag = (millis() - startTime) >= PRINT_DELAY_MS;
+  if(!gps.readingGPS && gps.gpsComplete && printFlag)
   {
+
     MultiWrite(gps.gpsBuf);
     PollIMU();
-    // TODO: delay could cause lost gps message
-    // change to timer and flag system
-    delay(GLOBAL_SAMPLERATE_DELAY_MS);
+
+    startTime = millis();
+    //delay(GLOBAL_SAMPLERATE_DELAY_MS);
   }
+}
+
+void SetupTimer()
+{
+  startTime = millis();
 }
 
 void SetupLogFile()
@@ -152,7 +161,7 @@ void PollIMU()
   printEvent(&angVelocityData, false);
   printEvent(&magnetometerData, true);
 
-  delay(GLOBAL_SAMPLERATE_DELAY_MS);
+ //delay(GLOBAL_SAMPLERATE_DELAY_MS);
 }
 
 void printEvent(sensors_event_t* event, bool last) {

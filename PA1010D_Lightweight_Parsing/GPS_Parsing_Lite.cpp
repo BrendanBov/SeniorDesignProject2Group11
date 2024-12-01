@@ -53,14 +53,14 @@ void PA1010D::PollGPS()
   static uint8_t msgIndex = 0;
 
   //New data available, clear buffer
-  if(gpsComplete && gpsSerial.available())
+  if(gpsComplete && (gpsSerial.available() > 0))
   {
     memset(gpsBuf, 0, sizeof(gpsBuf));
     gpsComplete = false;
   }
 
   //Date,Time,Latiude,Longitude,Satellites,Elevation (m),
-  while(gpsSerial.available())
+  while(gpsSerial.available() > 0)
   {
     char c = gpsSerial.read();
 
@@ -140,7 +140,7 @@ void PA1010D::PrintGPS(char* str, NMEAtype type, uint8_t index, bool end)
   {
     if (indexMask & printGGA)
     {
-      // date is at GGA index 1
+      // time is at GGA index 1
       if (index == 1) PrintTime(str);
       else if (indexMask & latLonMask) PrintLatLon(str, index == 4);
       else strcat(gpsBuf, str);

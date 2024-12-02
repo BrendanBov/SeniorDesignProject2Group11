@@ -10,6 +10,10 @@
 
 #define PMTK_SET_NMEA_OUTPUT_RMCGGA "$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28"
 #define PMTK_SET_NMEA_UPDATE_10HZ "$PMTK220,100*2F"
+#define PMTK_SET_NMEA_UPDATE_5HZ "$PMTK220,200*2C"
+#define PMTK_SET_NMEA_UPDATE_4HZ "$PMTK220,250*29"
+#define PMTK_SET_NMEA_UPDATE_2HZ "$PMTK220,500*2B"
+#define PMTK_SET_NMEA_UPDATE_1HZ "$PMTK220,1000*1F"
 #define PMTK_Q_RELEASE "$PMTK605*31"
 
 SoftwareSerial gpsSerial(9,8);  // default values
@@ -28,7 +32,7 @@ void PA1010D::SetupGPS()
   gpsSerial.println(F(PMTK_SET_NMEA_OUTPUT_RMCGGA));
 
   // Set the update rate
-  gpsSerial.println(F(PMTK_SET_NMEA_UPDATE_10HZ));
+  gpsSerial.println(F(PMTK_SET_NMEA_UPDATE_5HZ));
   
   // Ask for firmware version
   gpsSerial.println(F(PMTK_Q_RELEASE));

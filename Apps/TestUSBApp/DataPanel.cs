@@ -14,9 +14,10 @@ namespace TestUSBApp
 {
     public partial class DataPanel : UserControl
     {
+        const int baudrate = 115200; //19200; //9600; 
         private SerialPort activePort;
-        private SerialPort usbPort = new("COM3", 9600);
-        private SerialPort bluetoothPort = new("COM4", 9600);
+        private SerialPort usbPort = new("COM3", baudrate);
+        private SerialPort bluetoothPort = new("COM5", baudrate);
 
         private RichTextBox[] dataFields;
 
@@ -44,7 +45,8 @@ namespace TestUSBApp
 
         private void InitializeUSB()
         {
-            /*portnames = GetPorts();
+            /*
+            portnames = GetPorts();
             usbDevices.Clear();
             foreach (string port in portnames)
             {
@@ -132,16 +134,29 @@ namespace TestUSBApp
         private void HandleData()
         {
             // check for expected serial data format
-            string data;
+            string data = "";
             // TODO: consider opening a thread for serial polling
             // causes elements to not be interactive
+
             while (true)
             {
                 data = activePort.ReadLine();
+                //usbDevices.AppendText(data);
                 if (!string.IsNullOrEmpty(data)) break;
             }
 
-            //usbDevices.AppendText(data);
+            /*
+            data = activePort.ReadLine();
+            if (string.IsNullOrEmpty(data)) return;
+
+            usbDevices.AppendText(data);
+            */
+
+            /*while(activePort.BytesToRead > 0)
+            {
+                data += activePort.ReadChar();
+            }
+            usbDevices.AppendText(data);*/
 
             string[] fields = data.Split(',');
             if (fields.Length < 15) return;
@@ -151,9 +166,9 @@ namespace TestUSBApp
             for (int i = 0; i < 15; i++)
                 dataFields[i].Text = fields[i];
 
-            //TODO verify this output file is the same as the one on the SD card
+            // TODO verify this output file is the same as the one on the SD card
             // write to log file
-            //if file does not exist, create file and paste header
+            // if file does not exist, create file and paste header
             string toWrite = File.Exists(Path.Combine(filePath, "log.csv")) ? data : logHeader;
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(filePath, "log.csv"), true))
             {

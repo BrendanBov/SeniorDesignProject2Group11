@@ -1,6 +1,6 @@
 // Device Program
 // Group 11
-// Writes 9-axis Accelerometer and GPS data to 3 locations:
+// Writes GPS and 9-axis accelerometer data to 3 locations:
 // SD, USB, and Bluetooth
 
 // Custom gps library
@@ -13,7 +13,7 @@
 #include <Adafruit_BNO055.h>
 
 const uint16_t PRINT_DELAY_MS = 100;
-const int BAUDRATE = 9600;
+const unsigned long BAUDRATE = 115200; //9600; //19200; 
 
 // GPS param
 PA1010D gps(9, 8);
@@ -24,6 +24,7 @@ Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
 // SD
 const int pinCS = 10; // Chip Select for UNO, Used for SD card port
 const char* filePath = "log.csv";
+File logFile;
 
 // Bluetooth
 SoftwareSerial hc06(2,3);
@@ -34,7 +35,7 @@ unsigned long startTime = 0;
 void setup() 
 {
   Serial.begin(BAUDRATE); // Usb out
-  hc06.begin(BAUDRATE);   // bluetooth module
+  hc06.begin(BAUDRATE);
 
   gps.SetupGPS();
   SetupIMU();
@@ -76,7 +77,7 @@ void SetupLogFile()
 
   if (!SD.exists(filePath))  //write first line to log file
   {
-    File logFile = SD.open(filePath, FILE_WRITE);
+    logFile = SD.open(filePath, FILE_WRITE);
     logFile.println(F("Date,Time,Latiude,Longitude,Satellites,Elevation (m),X Accel (m/s^2),Y Accel (m/s^2),Z Accel (m/s^2),X Gyro (rps),Y Gyro (rps),Z Gyro (rps),X Mag (uT),Y Mag (uT),Z Mag (uT)"));
     logFile.close(); 
   }
@@ -84,7 +85,7 @@ void SetupLogFile()
 
 void SDWrite(String &data)
 {
-  File logFile = SD.open(filePath, FILE_WRITE);
+  logFile = SD.open(filePath, FILE_WRITE);
 
   if(logFile) 
   {
@@ -95,7 +96,7 @@ void SDWrite(String &data)
 
 void SDWrite(__FlashStringHelper* data)
 {
-  File logFile = SD.open(filePath, FILE_WRITE);
+  logFile = SD.open(filePath, FILE_WRITE);
 
   if(logFile) 
   {
@@ -106,7 +107,7 @@ void SDWrite(__FlashStringHelper* data)
 
 void SDWrite(char* data)
 {
-  File logFile = SD.open(filePath, FILE_WRITE);
+  logFile = SD.open(filePath, FILE_WRITE);
 
   if(logFile) 
   {

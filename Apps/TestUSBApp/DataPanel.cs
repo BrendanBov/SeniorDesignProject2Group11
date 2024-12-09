@@ -16,7 +16,7 @@ namespace TestUSBApp
     {
         const int baudrate = 115200; //19200; //9600; 
         private SerialPort activePort;
-        private SerialPort usbPort = new("COM3", baudrate);
+        private SerialPort usbPort = new("COM6", baudrate);
         private SerialPort bluetoothPort = new("COM5", baudrate);
 
         private RichTextBox[] dataFields;
@@ -59,6 +59,7 @@ namespace TestUSBApp
             {
                 activePort.Open();
                 errorLabel.Visible = false;
+                bluetoothPicture.Visible = false;
             }
             catch
             {
@@ -136,21 +137,22 @@ namespace TestUSBApp
             // check for expected serial data format
             string data = "";
             // TODO: consider opening a thread for serial polling
-            // causes elements to not be interactive
+            // causes elements to not be interactive 
 
-            while (true)
+            /*while (true)
             {
                 data = activePort.ReadLine();
                 //usbDevices.AppendText(data);
                 if (!string.IsNullOrEmpty(data)) break;
-            }
+            }*/
 
-            /*
+
+            if (activePort.BytesToRead <= 0) return;
             data = activePort.ReadLine();
             if (string.IsNullOrEmpty(data)) return;
 
-            usbDevices.AppendText(data);
-            */
+            //susbDevices.AppendText(data);
+            
 
             /*while(activePort.BytesToRead > 0)
             {
@@ -166,9 +168,18 @@ namespace TestUSBApp
             for (int i = 0; i < 15; i++)
                 dataFields[i].Text = fields[i];
 
-            // TODO verify this output file is the same as the one on the SD card
-            // write to log file
-            // if file does not exist, create file and paste header
+            // lat (2), lon (3)
+            char[] lat = dataFields[2].Text.ToCharArray();
+            char[] lon = dataFields[3].Text.ToCharArray();
+
+            // change ascii degree symbol to unicode
+            if (lat.Length >= 3) lat[2] = '°';
+            if (lon.Length >= 4) lon[3] = '°';
+
+            dataFields[2].Text = new(lat);
+            dataFields[3].Text = new(lon);
+
+            // Creates log file if it doesnt exists in documents, append data to file
             string toWrite = File.Exists(Path.Combine(filePath, "log.csv")) ? data : logHeader;
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(filePath, "log.csv"), true))
             {

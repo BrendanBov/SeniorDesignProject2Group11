@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestUSBApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+390c26a356df22749c7b77eff5ee0025e0f2e161")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7ad4b9ec90e29a139f9442a41baa870796efdd3")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestUSBApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestUSBApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

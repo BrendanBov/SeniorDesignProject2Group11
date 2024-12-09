@@ -13,10 +13,10 @@
 #include <Adafruit_BNO055.h>
 
 const uint16_t PRINT_DELAY_MS = 100;
-const unsigned long BAUDRATE = 115200; //9600; //19200; 
+const unsigned long BAUDRATE = 115200;
 
 // GPS param
-PA1010D gps(9, 8);
+PA1010D gps(9, 8, 200);
 
 //IMU Obj
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
@@ -29,12 +29,15 @@ File logFile;
 // Bluetooth
 SoftwareSerial hc06(2,3);
 
+//USB
+SoftwareSerial microUSB(5,4);
+
 // Timer
 unsigned long startTime = 0;
 
 void setup() 
 {
-  Serial.begin(BAUDRATE); // Usb out
+  microUSB.begin(BAUDRATE); // Usb out
   hc06.begin(BAUDRATE);
 
   gps.SetupGPS();
@@ -55,7 +58,6 @@ void loop()
     PollIMU();
 
     startTime = millis();
-    //delay(GLOBAL_SAMPLERATE_DELAY_MS);
   }
 }
 
@@ -71,7 +73,7 @@ void SetupLogFile()
   // SD Card Initialization
   if (!SD.begin())
   {
-    Serial.println(F("SD NOT FOUND"));
+    microUSB.println(F("SD NOT FOUND"));
     return;
   }
 
@@ -120,39 +122,37 @@ void SDWrite(char* data)
 void MultiWrite(String &str)
 {
   SDWrite(str);
-  Serial.print(str);
+  microUSB.print(str);
   hc06.print(str);
 }
 
 void MultiWrite(__FlashStringHelper* str)
 {
   SDWrite(str);
-  Serial.print(str);
+  microUSB.print(str);
   hc06.print(str);
 }
 
 void MultiWrite(char* str)
 {
   SDWrite(str);
-  Serial.print(str);
+  microUSB.print(str);
   hc06.print(str);
 }
 
 void SetupIMU()
 {
-  while (!Serial) delay(10);  // wait for serial port to open
-
   // Initialise the sensor
   if (!bno.begin())
   {
-    Serial.print(F("IMU ERROR"));
+    microUSB.print(F("IMU ERROR"));
     while (1);
   }
 }
 
+// event based polling
 void PollIMU()
 {
-  // could add VECTOR_ACCELEROMETER, VECTOR_MAGNETOMETER,VECTOR_GRAVITY...
   sensors_event_t accelerometerData, angVelocityData, magnetometerData;
   bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
   bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
@@ -161,8 +161,6 @@ void PollIMU()
   printEvent(&accelerometerData, false);
   printEvent(&angVelocityData, false);
   printEvent(&magnetometerData, true);
-
- //delay(GLOBAL_SAMPLERATE_DELAY_MS);
 }
 
 void printEvent(sensors_event_t* event, bool last) {

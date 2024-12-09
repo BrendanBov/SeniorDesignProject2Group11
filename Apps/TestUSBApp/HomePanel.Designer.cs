@@ -35,9 +35,11 @@
             // 
             // startButton
             // 
-            startButton.Location = new Point(115, 287);
+            startButton.Anchor = AnchorStyles.Top;
+            startButton.Location = new Point(250, 383);
+            startButton.Margin = new Padding(3, 4, 3, 4);
             startButton.Name = "startButton";
-            startButton.Size = new Size(215, 61);
+            startButton.Size = new Size(246, 81);
             startButton.TabIndex = 2;
             startButton.Text = "Show Measurements";
             startButton.UseVisualStyleBackColor = true;
@@ -45,9 +47,11 @@
             // 
             // quitButton
             // 
-            quitButton.Location = new Point(501, 286);
+            quitButton.Anchor = AnchorStyles.Top;
+            quitButton.Location = new Point(692, 381);
+            quitButton.Margin = new Padding(3, 4, 3, 4);
             quitButton.Name = "quitButton";
-            quitButton.Size = new Size(201, 62);
+            quitButton.Size = new Size(230, 83);
             quitButton.TabIndex = 3;
             quitButton.Text = "Quit Program";
             quitButton.UseVisualStyleBackColor = true;
@@ -55,23 +59,25 @@
             // 
             // titleLabel
             // 
+            titleLabel.Anchor = AnchorStyles.Top;
             titleLabel.AutoSize = true;
             titleLabel.Font = new Font("Segoe UI", 25F);
-            titleLabel.Location = new Point(207, 71);
+            titleLabel.Location = new Point(336, 95);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(443, 46);
+            titleLabel.Size = new Size(599, 57);
             titleLabel.TabIndex = 4;
-            titleLabel.Text = "Localization Device Program";
+            titleLabel.Text = "Localization Device Application";
             // 
             // HomePanel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(titleLabel);
             Controls.Add(quitButton);
             Controls.Add(startButton);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "HomePanel";
-            Size = new Size(849, 543);
+            Size = new Size(1208, 724);
             Load += HomePanel_Load;
             ResumeLayout(false);
             PerformLayout();

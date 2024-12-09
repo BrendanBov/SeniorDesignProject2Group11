@@ -75,7 +75,7 @@
             measurmentLabel.Anchor = AnchorStyles.Top;
             measurmentLabel.AutoSize = true;
             measurmentLabel.Font = new Font("Segoe UI", 25F);
-            measurmentLabel.Location = new Point(375, 75);
+            measurmentLabel.Location = new Point(379, 71);
             measurmentLabel.Name = "measurmentLabel";
             measurmentLabel.Size = new Size(277, 57);
             measurmentLabel.TabIndex = 1;
@@ -83,7 +83,8 @@
             // 
             // backButton
             // 
-            backButton.Location = new Point(443, 575);
+            backButton.Anchor = AnchorStyles.Top;
+            backButton.Location = new Point(469, 571);
             backButton.Margin = new Padding(3, 4, 3, 4);
             backButton.Name = "backButton";
             backButton.Size = new Size(107, 60);
@@ -109,7 +110,8 @@
             // 
             // accelXData
             // 
-            accelXData.Location = new Point(11, 491);
+            accelXData.Anchor = AnchorStyles.Top;
+            accelXData.Location = new Point(37, 487);
             accelXData.Margin = new Padding(3, 4, 3, 4);
             accelXData.Name = "accelXData";
             accelXData.ReadOnly = true;
@@ -119,9 +121,10 @@
             // 
             // accelXHeader
             // 
+            accelXHeader.Anchor = AnchorStyles.Top;
             accelXHeader.AutoSize = true;
             accelXHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            accelXHeader.Location = new Point(1, 467);
+            accelXHeader.Location = new Point(27, 463);
             accelXHeader.Name = "accelXHeader";
             accelXHeader.Size = new Size(124, 20);
             accelXHeader.TabIndex = 5;
@@ -130,9 +133,10 @@
             // 
             // accelYHeader
             // 
+            accelYHeader.Anchor = AnchorStyles.Top;
             accelYHeader.AutoSize = true;
             accelYHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            accelYHeader.Location = new Point(113, 467);
+            accelYHeader.Location = new Point(139, 463);
             accelYHeader.Name = "accelYHeader";
             accelYHeader.Size = new Size(124, 20);
             accelYHeader.TabIndex = 7;
@@ -141,7 +145,8 @@
             // 
             // accelYData
             // 
-            accelYData.Location = new Point(123, 491);
+            accelYData.Anchor = AnchorStyles.Top;
+            accelYData.Location = new Point(149, 487);
             accelYData.Margin = new Padding(3, 4, 3, 4);
             accelYData.Name = "accelYData";
             accelYData.ReadOnly = true;
@@ -151,9 +156,10 @@
             // 
             // accelZHeader
             // 
+            accelZHeader.Anchor = AnchorStyles.Top;
             accelZHeader.AutoSize = true;
             accelZHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            accelZHeader.Location = new Point(227, 467);
+            accelZHeader.Location = new Point(253, 463);
             accelZHeader.Name = "accelZHeader";
             accelZHeader.Size = new Size(123, 20);
             accelZHeader.TabIndex = 9;
@@ -162,7 +168,8 @@
             // 
             // accelZData
             // 
-            accelZData.Location = new Point(238, 491);
+            accelZData.Anchor = AnchorStyles.Top;
+            accelZData.Location = new Point(264, 487);
             accelZData.Margin = new Padding(3, 4, 3, 4);
             accelZData.Name = "accelZData";
             accelZData.ReadOnly = true;
@@ -172,9 +179,10 @@
             // 
             // gyroXHeader
             // 
+            gyroXHeader.Anchor = AnchorStyles.Top;
             gyroXHeader.AutoSize = true;
             gyroXHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            gyroXHeader.Location = new Point(341, 467);
+            gyroXHeader.Location = new Point(367, 463);
             gyroXHeader.Name = "gyroXHeader";
             gyroXHeader.Size = new Size(110, 20);
             gyroXHeader.TabIndex = 11;
@@ -183,7 +191,8 @@
             // 
             // gyroXData
             // 
-            gyroXData.Location = new Point(344, 491);
+            gyroXData.Anchor = AnchorStyles.Top;
+            gyroXData.Location = new Point(370, 487);
             gyroXData.Margin = new Padding(3, 4, 3, 4);
             gyroXData.Name = "gyroXData";
             gyroXData.ReadOnly = true;
@@ -193,9 +202,10 @@
             // 
             // gyroYHeader
             // 
+            gyroYHeader.Anchor = AnchorStyles.Top;
             gyroYHeader.AutoSize = true;
             gyroYHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            gyroYHeader.Location = new Point(443, 467);
+            gyroYHeader.Location = new Point(469, 463);
             gyroYHeader.Name = "gyroYHeader";
             gyroYHeader.Size = new Size(109, 20);
             gyroYHeader.TabIndex = 13;
@@ -204,7 +214,8 @@
             // 
             // gyroYData
             // 
-            gyroYData.Location = new Point(447, 491);
+            gyroYData.Anchor = AnchorStyles.Top;
+            gyroYData.Location = new Point(473, 487);
             gyroYData.Margin = new Padding(3, 4, 3, 4);
             gyroYData.Name = "gyroYData";
             gyroYData.ReadOnly = true;
@@ -214,9 +225,10 @@
             // 
             // gyroZHeader
             // 
+            gyroZHeader.Anchor = AnchorStyles.Top;
             gyroZHeader.AutoSize = true;
             gyroZHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            gyroZHeader.Location = new Point(547, 467);
+            gyroZHeader.Location = new Point(573, 463);
             gyroZHeader.Name = "gyroZHeader";
             gyroZHeader.Size = new Size(109, 20);
             gyroZHeader.TabIndex = 15;
@@ -225,7 +237,8 @@
             // 
             // gyroZData
             // 
-            gyroZData.Location = new Point(551, 491);
+            gyroZData.Anchor = AnchorStyles.Top;
+            gyroZData.Location = new Point(577, 487);
             gyroZData.Margin = new Padding(3, 4, 3, 4);
             gyroZData.Name = "gyroZData";
             gyroZData.ReadOnly = true;
@@ -235,9 +248,10 @@
             // 
             // magXHeader
             // 
+            magXHeader.Anchor = AnchorStyles.Top;
             magXHeader.AutoSize = true;
             magXHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            magXHeader.Location = new Point(662, 467);
+            magXHeader.Location = new Point(688, 463);
             magXHeader.Name = "magXHeader";
             magXHeader.Size = new Size(88, 20);
             magXHeader.TabIndex = 17;
@@ -246,7 +260,8 @@
             // 
             // magXData
             // 
-            magXData.Location = new Point(657, 491);
+            magXData.Anchor = AnchorStyles.Top;
+            magXData.Location = new Point(683, 487);
             magXData.Margin = new Padding(3, 4, 3, 4);
             magXData.Name = "magXData";
             magXData.ReadOnly = true;
@@ -256,9 +271,10 @@
             // 
             // magYHeader
             // 
+            magYHeader.Anchor = AnchorStyles.Top;
             magYHeader.AutoSize = true;
             magYHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            magYHeader.Location = new Point(767, 467);
+            magYHeader.Location = new Point(793, 463);
             magYHeader.Name = "magYHeader";
             magYHeader.Size = new Size(87, 20);
             magYHeader.TabIndex = 19;
@@ -267,7 +283,8 @@
             // 
             // magYData
             // 
-            magYData.Location = new Point(762, 491);
+            magYData.Anchor = AnchorStyles.Top;
+            magYData.Location = new Point(788, 487);
             magYData.Margin = new Padding(3, 4, 3, 4);
             magYData.Name = "magYData";
             magYData.ReadOnly = true;
@@ -277,9 +294,10 @@
             // 
             // magZHeader
             // 
+            magZHeader.Anchor = AnchorStyles.Top;
             magZHeader.AutoSize = true;
             magZHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            magZHeader.Location = new Point(873, 467);
+            magZHeader.Location = new Point(899, 463);
             magZHeader.Name = "magZHeader";
             magZHeader.Size = new Size(87, 20);
             magZHeader.TabIndex = 21;
@@ -288,7 +306,8 @@
             // 
             // magZData
             // 
-            magZData.Location = new Point(869, 491);
+            magZData.Anchor = AnchorStyles.Top;
+            magZData.Location = new Point(895, 487);
             magZData.Margin = new Padding(3, 4, 3, 4);
             magZData.Name = "magZData";
             magZData.ReadOnly = true;
@@ -298,11 +317,12 @@
             // 
             // errorLabel
             // 
+            errorLabel.Anchor = AnchorStyles.Top;
             errorLabel.AutoSize = true;
             errorLabel.BackColor = Color.Red;
             errorLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             errorLabel.ForeColor = SystemColors.Control;
-            errorLabel.Location = new Point(379, 149);
+            errorLabel.Location = new Point(383, 145);
             errorLabel.Name = "errorLabel";
             errorLabel.Size = new Size(270, 41);
             errorLabel.TabIndex = 22;
@@ -311,8 +331,9 @@
             // 
             // bluetoothPicture
             // 
+            bluetoothPicture.Anchor = AnchorStyles.Top;
             bluetoothPicture.Image = Resource1.bluetooth_icon_low_respng;
-            bluetoothPicture.Location = new Point(238, 89);
+            bluetoothPicture.Location = new Point(342, 85);
             bluetoothPicture.Name = "bluetoothPicture";
             bluetoothPicture.Size = new Size(43, 43);
             bluetoothPicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -325,7 +346,7 @@
             imuLabel.Anchor = AnchorStyles.Top;
             imuLabel.AutoSize = true;
             imuLabel.Font = new Font("Segoe UI", 20F);
-            imuLabel.Location = new Point(443, 404);
+            imuLabel.Location = new Point(469, 400);
             imuLabel.Name = "imuLabel";
             imuLabel.Size = new Size(83, 46);
             imuLabel.TabIndex = 24;
@@ -336,7 +357,7 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20F);
-            label1.Location = new Point(447, 241);
+            label1.Location = new Point(473, 237);
             label1.Name = "label1";
             label1.Size = new Size(80, 46);
             label1.TabIndex = 37;
@@ -344,9 +365,10 @@
             // 
             // elevationLabel
             // 
+            elevationLabel.Anchor = AnchorStyles.Top;
             elevationLabel.AutoSize = true;
             elevationLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            elevationLabel.Location = new Point(741, 309);
+            elevationLabel.Location = new Point(815, 305);
             elevationLabel.Name = "elevationLabel";
             elevationLabel.Size = new Size(73, 20);
             elevationLabel.TabIndex = 36;
@@ -355,7 +377,8 @@
             // 
             // elevationData
             // 
-            elevationData.Location = new Point(713, 333);
+            elevationData.Anchor = AnchorStyles.Top;
+            elevationData.Location = new Point(787, 329);
             elevationData.Margin = new Padding(3, 4, 3, 4);
             elevationData.Name = "elevationData";
             elevationData.ReadOnly = true;
@@ -365,9 +388,10 @@
             // 
             // longitudeLabel
             // 
+            longitudeLabel.Anchor = AnchorStyles.Top;
             longitudeLabel.AutoSize = true;
             longitudeLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            longitudeLabel.Location = new Point(453, 309);
+            longitudeLabel.Location = new Point(527, 305);
             longitudeLabel.Name = "longitudeLabel";
             longitudeLabel.Size = new Size(80, 20);
             longitudeLabel.TabIndex = 34;
@@ -376,7 +400,8 @@
             // 
             // longitudeData
             // 
-            longitudeData.Location = new Point(441, 333);
+            longitudeData.Anchor = AnchorStyles.Top;
+            longitudeData.Location = new Point(515, 329);
             longitudeData.Margin = new Padding(3, 4, 3, 4);
             longitudeData.Name = "longitudeData";
             longitudeData.ReadOnly = true;
@@ -386,9 +411,10 @@
             // 
             // latitudeLabel
             // 
+            latitudeLabel.Anchor = AnchorStyles.Top;
             latitudeLabel.AutoSize = true;
             latitudeLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            latitudeLabel.Location = new Point(344, 309);
+            latitudeLabel.Location = new Point(418, 305);
             latitudeLabel.Name = "latitudeLabel";
             latitudeLabel.Size = new Size(67, 20);
             latitudeLabel.TabIndex = 32;
@@ -397,7 +423,8 @@
             // 
             // latitudeData
             // 
-            latitudeData.Location = new Point(314, 333);
+            latitudeData.Anchor = AnchorStyles.Top;
+            latitudeData.Location = new Point(388, 329);
             latitudeData.Margin = new Padding(3, 4, 3, 4);
             latitudeData.Name = "latitudeData";
             latitudeData.ReadOnly = true;
@@ -407,9 +434,10 @@
             // 
             // satellitesLabel
             // 
+            satellitesLabel.Anchor = AnchorStyles.Top;
             satellitesLabel.AutoSize = true;
             satellitesLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            satellitesLabel.Location = new Point(595, 309);
+            satellitesLabel.Location = new Point(669, 305);
             satellitesLabel.Name = "satellitesLabel";
             satellitesLabel.Size = new Size(72, 20);
             satellitesLabel.TabIndex = 30;
@@ -418,7 +446,8 @@
             // 
             // satellitesData
             // 
-            satellitesData.Location = new Point(575, 333);
+            satellitesData.Anchor = AnchorStyles.Top;
+            satellitesData.Location = new Point(649, 329);
             satellitesData.Margin = new Padding(3, 4, 3, 4);
             satellitesData.Name = "satellitesData";
             satellitesData.ReadOnly = true;
@@ -428,9 +457,10 @@
             // 
             // timeLabel
             // 
+            timeLabel.Anchor = AnchorStyles.Top;
             timeLabel.AutoSize = true;
             timeLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            timeLabel.Location = new Point(227, 309);
+            timeLabel.Location = new Point(301, 305);
             timeLabel.Name = "timeLabel";
             timeLabel.Size = new Size(44, 20);
             timeLabel.TabIndex = 28;
@@ -439,7 +469,8 @@
             // 
             // timeData
             // 
-            timeData.Location = new Point(185, 333);
+            timeData.Anchor = AnchorStyles.Top;
+            timeData.Location = new Point(259, 329);
             timeData.Margin = new Padding(3, 4, 3, 4);
             timeData.Name = "timeData";
             timeData.ReadOnly = true;
@@ -449,9 +480,10 @@
             // 
             // dateLabel
             // 
+            dateLabel.Anchor = AnchorStyles.Top;
             dateLabel.AutoSize = true;
             dateLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dateLabel.Location = new Point(83, 309);
+            dateLabel.Location = new Point(157, 305);
             dateLabel.Name = "dateLabel";
             dateLabel.Size = new Size(42, 20);
             dateLabel.TabIndex = 26;
@@ -460,7 +492,8 @@
             // 
             // dateData
             // 
-            dateData.Location = new Point(50, 333);
+            dateData.Anchor = AnchorStyles.Top;
+            dateData.Location = new Point(124, 329);
             dateData.Margin = new Padding(3, 4, 3, 4);
             dateData.Name = "dateData";
             dateData.ReadOnly = true;
@@ -511,7 +544,7 @@
             Controls.Add(measurmentLabel);
             Margin = new Padding(3, 4, 3, 4);
             Name = "DataPanel";
-            Size = new Size(982, 700);
+            Size = new Size(1030, 700);
             Load += DataPanel_Load;
             VisibleChanged += DataPanel_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)bluetoothPicture).EndInit();
